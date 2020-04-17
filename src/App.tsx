@@ -30,19 +30,12 @@ export default function App(): JSX.Element {
       <Heading>Progress Bar Demo</Heading>
       <PBContainer>
         {state.progressBars.bars &&
-          state.progressBars.bars.map((bar: number, index: number) => {
-            return state.selectedBar === index ? (
-              <PBItem key={index}>
-                <Precentage>{bar <= 0 ? 0 : bar}%</Precentage>
-                <Progress bar={bar <= 0 ? 0 : bar}/>
-              </PBItem>
-            ) : (
+          state.progressBars.bars.map((bar: number, index: number) => (
               <PBItem key={index}>
                 <Precentage>{bar}%</Precentage>
                 <Progress bar={bar} />
               </PBItem>
-            );
-          })}
+          ))}
       </PBContainer>
       <ControlContainer>
         <ControlItem>
