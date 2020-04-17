@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export default function ProgressBar(bar:any):JSX.Element {
     return (
-        <PBar style={{ width: `${bar.bar}%` }}></PBar>
+        <PBar style={{ width: `${bar.bar}%`, backgroundColor: bar.bar > 100 ? '#dd0000': '' }}></PBar>
     )
 }
 

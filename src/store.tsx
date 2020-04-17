@@ -18,26 +18,38 @@ function reducer(state: IState, action: IAction): IState {
     case "INCREASE":
       return {
         ...state,
-        updateValue: state.progressBars.bars.filter(
-          (bar: number, index: number) => {
-            if (index === state.selectedBar) {
-
-              console.log("bar: ", bar = bar + action.updateValue);
-              return bar = bar + action.updateValue;
-            } else {
-              return bar;
+        progressBars: {
+          bars: state.progressBars.bars.map(
+            (bar: number, index: number) => {
+              if (index === state.selectedBar) {
+                const total = bar + action.updateValue;
+                return total > state.progressBars.limit ? state.progressBars.limit : total;
+              } else {
+                return bar;
+              }
             }
-          }
-        ),
+          ),
+          buttons: state.progressBars.buttons,
+          limit: state.progressBars.limit
+        }
       };
     case "DECREASE":
       return {
         ...state,
-        updateValue: state.progressBars.bars.filter(
-          (bar: number, index: number) => {
-            return index === state.selectedBar ? bar - action.updateValue : bar;
-          }
-        ),
+        progressBars: {
+          bars: state.progressBars.bars.map(
+            (bar: number, index: number) => {
+              if (index === state.selectedBar) {
+                const total = bar - action.updateValue;
+                return total < 0 ? 0 : total;
+              } else {
+                return bar;
+              }
+            }
+          ),
+          buttons: state.progressBars.buttons,
+          limit: state.progressBars.limit
+        }
       };
     case "SELECT_PROGRESS":
       return { ...state, selectedBar: action.selectedBar };

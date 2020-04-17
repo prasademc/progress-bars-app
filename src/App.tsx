@@ -25,8 +25,6 @@ export default function App(): JSX.Element {
     });
   };
 
-  console.log(state);
-
   return (
     <Wrapper>
       <Heading>Progress Bar Demo</Heading>
@@ -35,8 +33,8 @@ export default function App(): JSX.Element {
           state.progressBars.bars.map((bar: number, index: number) => {
             return state.selectedBar === index ? (
               <PBItem key={index}>
-                <Precentage>{state.updateValue}%</Precentage>
-                <Progress bar={state.updateValue} />
+                <Precentage>{bar <= 0 ? 0 : bar}%</Precentage>
+                <Progress bar={bar <= 0 ? 0 : bar}/>
               </PBItem>
             ) : (
               <PBItem key={index}>
